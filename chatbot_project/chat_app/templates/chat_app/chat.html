@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Django Chatbot</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; }
+        #chat-window { height: 300px; border: 1px solid #eee; padding: 10px; overflow-y: scroll; margin-bottom: 10px; }
+        .user-message { text-align: right; color: blue; }
+        .bot-message { text-align: left; color: green; }
+        input[type="text"] { width: 80%; padding: 10px; }
+        button { padding: 10px; width: 18%; }
+    </style>
+</head>
+<body>
+    <h1>MadBOT 🤖</h1>
+    <div id="chat-window">
+        <div class="bot-message">Hello! I'm you're younger sibling.</div>
+    </div>
+    <input type="text" id="user-input" placeholder="Type your message here...">
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+        // Get the chat window element
+        const chatWindow = document.getElementById('chat-window');
+        // Get the input field
+        const userInput = document.getElementById('user-input');
+
+        // Function to append messages to the chat window
+        function appendMessage(sender, message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = sender === 'user' ? 'user-message' : 'bot-message';
+            messageDiv.textContent = message;
+            chatWindow.appendChild(messageDiv);
+            // Scroll to the bottom of the chat window
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        }
+
+        // Function to send the message to the Django API
+        async function sendMessage() {
+            const message = userInput.value.trim();
+            if (message === '') return; // Don't send empty messages
+
+            // Display user message immediately
+            appendMessage('user', 'You: ' + message);
+            userInput.value = ''; // Clear the input field
+
+            try {
+                // Send the message to the API endpoint
+                const response = await fetch('/api/chat/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // NOTE: In a real Django project, you'd need to handle the CSRF token.
+                        // Since we used @csrf_exempt on the view, we can skip it for this basic demo.
+                    },
+                    body: JSON.stringify({ message: message })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Display the chatbot's response
+                    appendMessage('bot', 'Bot: ' + data.response);
+                } else {
+                    // Display API error message
+                    appendMessage('bot', 'Error: ' + (data.error || 'Could not get response.'));
+                }
+            } catch (error) {
+                console.error('Fetch error:', error);
+                appendMessage('bot', 'Network Error: Could not reach the server.');
+            }
+        }
+        
+        // Allow sending message by pressing Enter
+        userInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+    </script>
+</body>
+</html>

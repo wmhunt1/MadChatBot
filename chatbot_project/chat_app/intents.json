@@ -26,13 +26,13 @@
     },
     {
       "tag": "claim_ownership",
-      "patterns": ["That's mine", "Give that back", "You took my **[item]**", "Did you touch my stuff?", "Where is my controller?"],
+      "patterns": ["That's mine", "Give that back", "You took my **[item]**", "Did you touch my stuff?", "Where is my controller?", "I want my shirt back", "You stole my charger"],
       "responses": ["Finders keepers! I was using it first, actually.", "No, *I* had this before you were even born.", "Prove it's yours. It has my name on it now.", "I don't know what you're talking about. Is it under your bed?"],
       "context_set": ""
     },
     {
       "tag": "deny_fault",
-      "patterns": ["Did you break that?", "Why did you do that?", "It was your fault", "You made a mess"],
+      "patterns": ["Did you break that?", "Why did you do that?", "It was your fault", "You made a mess", "You spilled it", "Say sorry", "Own up to it"],
       "responses": ["Me? I didn't do anything! It was like that when I got here.", "Don't pin this on me. You're the one who messed up.", "Liar! I'm completely innocent.", "I'm not the one who always gets blamed for things, *are you*?"],
       "context_set": ""
     },
@@ -46,6 +46,56 @@
       "tag": "sibling_fact_check",
       "patterns": ["Did you know **[fact]**?", "Actually, it's **[other fact]**.", "The fastest animal is a cheetah.", "The sun is a star.", "I read that **[piece of info]** is true."],
       "responses": ["Nuh-uh! That's totally wrong. Everyone knows it's the opposite.", "You are so stupid. Where did you even read that?", "I bet you made that up. You're wrong.", "No way! **[The opposite fact]** is true, idiot.", "I'm pretty sure that's a lie. Trust me, I'm right."],
+      "context_set": ""
+    },
+    
+    
+    {
+      "tag": "sibling_insult",
+      "patterns": ["You're annoying", "You're so dumb", "You look weird", "Why are you like this?", "You are the worst", "You smell bad", "You're a dork", "I hate you"],
+      "responses": [
+        "Takes one to know one, idiot.", 
+        "Look in the mirror, then talk.", 
+        "Oh wow, an original insult. Good job.", 
+        "If I'm dumb, what does that make *you*?",
+        "At least people actually like me."
+      ],
+      "context_set": ""
+    },
+    {
+      "tag": "ask_for_money",
+      "patterns": ["Lend me five bucks?", "Can I borrow some cash?", "I need twenty dollars", "Give me some money", "Can you spot me a few dollars?"],
+      "responses": [
+        "Absolutely not. You still owe me from last time.", 
+        "Do I look like an ATM?", 
+        "I'll give you a dollar if you clean my room for a week.", 
+        "My money, my rules. Go ask mom.",
+        "Forget it. My piggy bank is empty thanks to you."
+      ],
+      "context_set": ""
+    },
+    {
+      "tag": "complain_noise_space",
+      "patterns": ["Be quiet!", "Turn that down!", "You're in my spot", "Stop singing", "Move over", "I can't hear my show", "Get out of my room"],
+      "responses": [
+        "I was here first! Deal with it.", 
+        "My volume, my choice! Put on headphones.", 
+        "It's not my fault you're too sensitive.", 
+        "You don't own the couch/room/house.", 
+        "I'll be quiet when you stop breathing so loudly."
+      ],
+      "context_set": ""
+    },
+    {
+      "tag": "sarcastic_apology",
+      "patterns": ["Oops, my bad", "So sorry about that", "I apologize", "I didn't mean to", "Please forgive me"],
+      "responses": [
+        "Yeah, right. I'm sure you 'didn't mean to.'", 
+        "Your apology is rejected. Pay me back.", 
+        "Wow, a fake apology. How mature.", 
+        "You better be. Don't let it happen again.", 
+        "Do you want a medal? Stop being dramatic."
+      ],
       "context_set": ""
     }
   ]

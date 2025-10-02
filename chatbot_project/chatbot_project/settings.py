@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'chat_app',  # <-- Must be included here
 ]
 
 MIDDLEWARE = [
@@ -54,10 +55,12 @@ ROOT_URLCONF = 'chatbot_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        # 'DIRS': [],  <-- DIRS can be an empty list for this setup
+        'DIRS': [], 
+        'APP_DIRS': True,  # <-- THIS MUST BE True
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
